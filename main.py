@@ -7,12 +7,22 @@ class yilan():
     def __init__(self):
         self.yilanX=300
         self.yilanY=300
+        self.yilanUzunlugu=[]
+        self.yilanTamami=[]
+        self.yilanLength=1
 
 
     def draw(self,mx,my): #yılanı cizer
         self.yilanX= self.yilanX + mx * 5
         self.yilanY = self.yilanY + my * 5
         pygame.draw.rect(gameDisplay, mavi, [self.yilanX, self.yilanY, 20, 20])
+
+
+      #  if len(self.yilanUzunlugu) > self.yilanLength:
+       #     del self.yilanUzunlugu[0]
+        for XY in self.yilanUzunlugu:
+            pygame.draw.rect(gameDisplay, mavi, [XY[0], XY[1], 20, 20])
+
 
     def ekranGecisi(self,screen): #ekran arası yılan gecisi icin
 
@@ -27,6 +37,27 @@ class yilan():
         elif self.yilanX < 0:
             self.yilanX = width-5
 
+    def eat(self):
+
+        if gamePlane.yilanX >= gamePlaneApple.rectangle[0] and gamePlane.yilanX <= (gamePlaneApple.rectangle[0])+gamePlaneApple.rectangle[2]:
+
+            if gamePlane.yilanY >= gamePlaneApple.rectangle[1] and gamePlane.yilanY <= (gamePlaneApple.rectangle[1])+gamePlaneApple.rectangle[3]:
+
+                yeni=elma(gameDisplay)
+                gamePlaneApple.rectangle[0]=yeni.elmaX
+                gamePlaneApple.rectangle[1] = yeni.elmaY
+                self.yilanLength+=1
+                self.yilanTamami=[]
+                self.yilanTamami.append(self.yilanX)
+                self.yilanTamami.append(self.yilanY)
+                self.yilanUzunlugu.append(self.yilanTamami)
+                print("yilan: ", self.yilanUzunlugu)
+                #self.yilanUzunlugu.append(self.yilanX)
+                #self.yilanUzunlugu.append(self.yilanY)
+
+                #if len(self.yilanUzunlugu) > self.yilanLength:
+                   #del self.yilanUzunlugu[0]
+
 class elma():
     def __init__(self,screen):
 
@@ -40,17 +71,6 @@ class elma():
         self.image = pygame.image.load("images/1ArtıranElma.png")
         self.image= pygame.transform.scale(self.image, (self.rectangle[2],self.rectangle[3]))
         screen.blit(self.image, self.rectangle)
-
-        #pygame.draw.rect(gameDisplay, black, [self.elmaX, self.elmaY, 30, 30])
-
-    def eat(self):
-        if gamePlane.yilanX >= self.rectangle[0] and gamePlane.yilanX <= (self.rectangle[0])+self.rectangle[2]:
-            if gamePlane.yilanY >= self.rectangle[1] and gamePlane.yilanY <= (self.rectangle[1])+self.rectangle[3]:
-
-                yeni=elma(gameDisplay)
-                self.rectangle[0]=yeni.elmaX
-                self.rectangle[1] = yeni.elmaY
-
 
 
 pygame.init()
@@ -94,10 +114,11 @@ while not crashed:
 
     gameDisplay.fill(white)
     gamePlane.ekranGecisi(gameDisplay)
+    gamePlane.eat()
     gamePlane.draw(mx, my)
     gamePlaneApple.drawApple(gameDisplay)
 
-    gamePlaneApple.eat()
+
 
 
     clock.tick(30)  #burada saniyede 30 framelik bir yenilenme olacak demektir.
