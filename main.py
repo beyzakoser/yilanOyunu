@@ -8,20 +8,27 @@ class yilan():
         self.yilanX=300
         self.yilanY=300
         self.yilanUzunlugu=[]
-        self.yilanTamami=[]
+
         self.yilanLength=1
 
 
     def draw(self,mx,my): #yılanı cizer
         self.yilanX= self.yilanX + mx * 5
         self.yilanY = self.yilanY + my * 5
-        pygame.draw.rect(gameDisplay, mavi, [self.yilanX, self.yilanY, 20, 20])
 
+        self.yilanTamami = []
+        self.yilanTamami.append(self.yilanX)
+        self.yilanTamami.append(self.yilanY)
+        self.yilanUzunlugu.append(self.yilanTamami)
+        #pygame.draw.rect(gameDisplay, mavi, [self.yilanX, self.yilanY, 20, 20])
 
-      #  if len(self.yilanUzunlugu) > self.yilanLength:
-       #     del self.yilanUzunlugu[0]
         for XY in self.yilanUzunlugu:
-            pygame.draw.rect(gameDisplay, mavi, [XY[0], XY[1], 20, 20])
+
+            pygame.draw.rect(gameDisplay, mavi, [XY[0], XY[1],20, 20])
+            #print("XY[0]: ",XY[0],"XY[1]: ",XY[1])
+
+        if len(self.yilanUzunlugu) > self.yilanLength:
+            del self.yilanUzunlugu[0]
 
 
     def ekranGecisi(self,screen): #ekran arası yılan gecisi icin
@@ -47,11 +54,7 @@ class yilan():
                 gamePlaneApple.rectangle[0]=yeni.elmaX
                 gamePlaneApple.rectangle[1] = yeni.elmaY
                 self.yilanLength+=1
-                self.yilanTamami=[]
-                self.yilanTamami.append(self.yilanX)
-                self.yilanTamami.append(self.yilanY)
-                self.yilanUzunlugu.append(self.yilanTamami)
-                print("yilan: ", self.yilanUzunlugu)
+
                 #self.yilanUzunlugu.append(self.yilanX)
                 #self.yilanUzunlugu.append(self.yilanY)
 
