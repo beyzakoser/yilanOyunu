@@ -4,30 +4,37 @@ import time
 
 class yilan():
 
-    def __init__(self):
+    def __init__(self,screen):
         self.yilanX=300
         self.yilanY=300
+        width=screen.get_width() #800
+        height=screen.get_height() #600
         self.yilanUzunlugu=[]
 
-        self.yilanLength=1
+        self.yilanLength=0
+        self.rectangle = pygame.rect.Rect(self.yilanX , self.yilanY ,int(width / 40),int(height / 30))
 
 
-    def draw(self,mx,my): #yılanı cizer
-        self.yilanX= self.yilanX + mx * 5
-        self.yilanY = self.yilanY + my * 5
+    def draw(self,mx,my,screen): #yılanı cizer
+        self.yilanX= self.yilanX + mx*3
+        self.yilanY = self.yilanY + my*3
+
 
         self.yilanTamami = []
         self.yilanTamami.append(self.yilanX)
         self.yilanTamami.append(self.yilanY)
-        self.yilanUzunlugu.append(self.yilanTamami)
-        #pygame.draw.rect(gameDisplay, mavi, [self.yilanX, self.yilanY, 20, 20])
+        self.yilanUzunlugu.append(self.yilanTamami) # yilanUzunlugu=[[x,y],[x,y],[x,y]]
 
-        for XY in self.yilanUzunlugu:
 
-            pygame.draw.rect(gameDisplay, mavi, [XY[0], XY[1],20, 20])
-            #print("XY[0]: ",XY[0],"XY[1]: ",XY[1])
+        for konumlar in self.yilanUzunlugu:
+            self.image = pygame.image.load("images/gri3min.png")
+            self.image = pygame.transform.scale(self.image, (self.rectangle[2], self.rectangle[3]))
+            self.rectangle[0]=konumlar[0]
+            self.rectangle[1]=konumlar[1]
+            screen.blit(self.image, self.rectangle)
 
-        if len(self.yilanUzunlugu) > self.yilanLength:
+
+        if len(self.yilanUzunlugu) > self.yilanLength: #yılan sondan silindi uzayıp gitmesin diye
             del self.yilanUzunlugu[0]
 
 
@@ -47,19 +54,12 @@ class yilan():
     def eat(self):
 
         if gamePlane.yilanX >= gamePlaneApple.rectangle[0] and gamePlane.yilanX <= (gamePlaneApple.rectangle[0])+gamePlaneApple.rectangle[2]:
-
             if gamePlane.yilanY >= gamePlaneApple.rectangle[1] and gamePlane.yilanY <= (gamePlaneApple.rectangle[1])+gamePlaneApple.rectangle[3]:
-
                 yeni=elma(gameDisplay)
                 gamePlaneApple.rectangle[0]=yeni.elmaX
                 gamePlaneApple.rectangle[1] = yeni.elmaY
                 self.yilanLength+=1
 
-                #self.yilanUzunlugu.append(self.yilanX)
-                #self.yilanUzunlugu.append(self.yilanY)
-
-                #if len(self.yilanUzunlugu) > self.yilanLength:
-                   #del self.yilanUzunlugu[0]
 
 class elma():
     def __init__(self,screen):
@@ -91,7 +91,7 @@ mavi=(91,163,220)
 gameDisplay.fill(white)
 
 
-gamePlane=yilan()
+gamePlane=yilan(gameDisplay)
 gamePlaneApple=elma(gameDisplay)
 mx=0
 my=0
@@ -102,29 +102,26 @@ while not crashed:
             crashed = True  #  döngüyü kırar
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                mx  = -1
+                mx  = -5
                 my  = 0
             elif event.key == pygame.K_RIGHT:
-                mx  = 1
+                mx  =5
                 my  = 0
             elif event.key == pygame.K_UP:
-                my  = -1
+                my  = -5
                 mx  = 0
             elif event.key == pygame.K_DOWN:
-                my = 1
+                my = 5
                 mx  = 0
 
 
     gameDisplay.fill(white)
     gamePlane.ekranGecisi(gameDisplay)
     gamePlane.eat()
-    gamePlane.draw(mx, my)
+    gamePlane.draw(mx, my,gameDisplay)
     gamePlaneApple.drawApple(gameDisplay)
 
-
-
-
-    clock.tick(30)  #burada saniyede 30 framelik bir yenilenme olacak demektir.
+    clock.tick(20)  #burada saniyede 30 framelik bir yenilenme olacak demektir.
     pygame.display.update()  # her döngüde ekranı tekrar çizdiriyoruz
 
 pygame.quit()
