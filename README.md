@@ -4,6 +4,8 @@ Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 
 ## Proje Tasarımı 
 ![](resim1.png)
+![](resim2.png)
+![](resim3.png)
 
 
 	
