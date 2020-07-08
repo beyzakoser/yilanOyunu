@@ -1,12 +1,6 @@
 
 ## Projenin amacı
 Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
-
-## Proje Tasarımı 
-<img src="resim1.png" width="700" height="500" >
-<img src="resim2.png" width="700" height="500" >
-<img src="resim3.png" width="750" height="550" >
-
 	
 ## Projede Yapılanlar
 
@@ -25,3 +19,8 @@ Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 * Oyun sırasında escape tuşuna basıldığında ekranda Restart, Resume, Exit butonları olan bir menü eklendi. 
 
 * Oyun bittiğinde ekranda Game Over yazısı, Restart ve Exit butonları eklendi. 
+
+## Proje Tasarımı 
+<img src="resim1.png" width="700" height="500" >
+<img src="resim2.png" width="700" height="500" >
+<img src="resim3.png" width="750" height="550" >
