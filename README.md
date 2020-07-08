@@ -20,6 +20,8 @@ Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 
 * İki elmanın üst üste gelmemesi ve duvara çarptığında oyunun sonlanması için gerekli kontroller yapıldı.
 
+* Ekranda zaman ve skor bilgisi gösterildi. Zaman ve skor 100 ü geçerse oyun bitecek şekilde ayarlandı. 
+
 * Oyun sırasında escape tuşuna basıldığında ekranda Restart, Resume, Exit butonları olan bir menü eklendi. 
 
 * Oyun bittiğinde ekranda Game Over yazısı, Restart ve Exit butonları eklendi. 
