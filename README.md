@@ -1,9 +1,9 @@
 
 ## Projenin amacı
-#Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
+Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 
 ## Proje Tasarımı 
-(./schema.jpg)
+(./yilanOyunu/resim1.png)
 
 
 	
