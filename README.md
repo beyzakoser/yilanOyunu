@@ -3,7 +3,7 @@
 Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 
 ## Proje Tasarımı 
-![](yilanOyunu/resim1.png)
+![](resim1.png)
 
 
 	
