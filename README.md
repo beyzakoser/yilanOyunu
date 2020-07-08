@@ -3,7 +3,8 @@
 Pygame kütüphanesi kullarak yılan oyunu tasarlamak.
 
 ## Proje Tasarımı 
-<img src="resim1.png" width="500" height="500" >
+<img src="resim1.png" width="700" height="500" >
+<img src="resim2.png" width="700" height="500" >
 ![](resim1.png)
 ![](resim2.png)
 ![](resim3.png)
